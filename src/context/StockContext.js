@@ -14,6 +14,12 @@ export const StockContextProvider=({children})=>
         {
             case "DEPARTMENT":
                 return {...state,currentDepartment:payload};
+               
+            case "TOGGLE_LOWSTOCK":
+                return {...state,isLowStock:payload};    
+
+            case "FILTER":
+                return {...state,currentFilter:payload};    
 
             case "INPUT_FIELDS":
                 return {...state,input:{...state.input,[inputField]:payload}};  
@@ -34,11 +40,14 @@ export const StockContextProvider=({children})=>
     }
     const initialState= {
         inventory:inventoryData,
-        currentDepartment:"all",
-        input:{department:"",name:"",description:"",price:"",stock:"",sku:"",supplier:"",imageUrl:""},
+        currentDepartment:"All",
+        input:{department:"",name:"",description:"",price:"",stock:"",sku:"",supplier:"",imageUrl:"",delivered:0},
         id:55,
+        isLowStock:false,
+        currentFilter:"",
     }
     const [state,dispatch]=useReducer(Reducer,initialState);
+    const {inventory,currentDepartment,currentFilter}=state;
 
     const addNewProduct=()=>
     {
@@ -49,7 +58,8 @@ export const StockContextProvider=({children})=>
 
         dispatch({type:"ADD_PRODUCT_TO_INVENTORY",payload:updatedInventory});
         setLocalStorage("inventory",updatedInventory);
-    }
+    } 
+
 
     useEffect(()=>{
         const fetchedInventory=getLocalStorage("inventory");

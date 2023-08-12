@@ -37,12 +37,12 @@ export const AddProduct = () => {
 
         <section className={styles.section}>
             <label htmlFor='price'>Price:</label>
-            <input id="price" type='number' placeholder={0} value={price} onChange={(e)=>changeHandler(e,"price")}></input>
+            <input id="price" type='number' placeholder={0} value={price} onChange={(e)=>dispatch({type:"INPUT_FIELDS",payload:Number(e.target.value),inputField:"price"})}></input>
         </section>
 
         <section className={styles.section}>
             <label htmlFor='stock'>Stock:</label>
-            <input id="stock" type='number' value={stock} placeholder={0} onChange={(e)=>changeHandler(e,"stock")}></input>
+            <input id="stock" type='number' value={stock} placeholder={0} onChange={(e)=>dispatch({type:"INPUT_FIELDS",payload:Number(e.target.value),inputField:"stock"})}></input>
         </section>
 
         <section className={styles.section}>

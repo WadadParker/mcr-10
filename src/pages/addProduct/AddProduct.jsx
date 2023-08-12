@@ -9,8 +9,6 @@ export const AddProduct = () => {
     const {state,dispatch,addNewProduct,checkEmptyInputFields}=useData();
     const {input:{department,name,description,price,stock,sku,supplier,imageUrl}}=state;
 
-    console.log(checkEmptyInputFields());
-
     const changeHandler=(e,input)=>
     {
         dispatch({type:"INPUT_FIELDS",payload:e.target.value,inputField:input})

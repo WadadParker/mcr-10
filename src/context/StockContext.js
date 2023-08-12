@@ -11,10 +11,8 @@ export const StockContextProvider=({children})=>
         const clearInput={name:"",description:""};
         switch(type) 
         {
-
-
-
-
+            case "DEPARTMENT":
+                return {...state,currentDepartment:payload};
 
             case "INPUT_FIELDS":
                 return {...state,input:{...state.input,[inputField]:payload}};  
@@ -33,6 +31,7 @@ export const StockContextProvider=({children})=>
     }
     const initialState= {
         inventory:inventoryData,
+        currentDepartment:"all",
     }
     const [state,dispatch]=useReducer(Reducer,initialState);
 

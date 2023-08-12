@@ -6,15 +6,15 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter } from 'react-router-dom';
 
-import { ContextProvider } from './context/Context';
+import { StockContextProvider } from './context/StockContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ContextProvider>
+      <StockContextProvider>
         <App />
-      </ContextProvider>
+      </StockContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

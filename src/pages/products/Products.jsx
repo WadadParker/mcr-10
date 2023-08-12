@@ -34,4 +34,3 @@ export const Products = () => {
     </div>
   )
 }
-//id image name descrip price stock supplier

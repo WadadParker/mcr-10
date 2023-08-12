@@ -24,7 +24,7 @@ export const FilterBar = () => {
         </span>
 
         <select value={currentFilter} onChange={(e)=>dispatch({type:"FILTER",payload:e.target.value})}>
-            <option disabled selected value="">Name</option>
+            <option value="name">Name</option>
             <option value="price">Price</option>
             <option value="stock">Stock</option>
         </select>

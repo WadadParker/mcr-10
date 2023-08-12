@@ -19,7 +19,7 @@ export const Products = () => {
         {
         return [...filteredInventory].sort((a,b)=>a.stock-b.stock);
         }
-        else {return filteredInventory};
+        else {return [...filteredInventory].sort((a, b) => a.name.localeCompare(b.name));};
     }
     const sortedInventory=sortByFilter(filteredByDepartment);   
 

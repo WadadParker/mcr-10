@@ -6,8 +6,10 @@ import { useData } from '../../context/StockContext'
 
 export const AddProduct = () => {
 
-    const {state,dispatch,addNewProduct}=useData();
+    const {state,dispatch,addNewProduct,checkEmptyInputFields}=useData();
     const {input:{department,name,description,price,stock,sku,supplier,imageUrl}}=state;
+
+    console.log(checkEmptyInputFields());
 
     const changeHandler=(e,input)=>
     {
@@ -65,7 +67,7 @@ export const AddProduct = () => {
             <input id="image" value={imageUrl} onChange={(e)=>changeHandler(e,"imageUrl")}></input>
         </section>
 
-        <button className={styles.button} onClick={()=>addNewProduct()}> Add Product </button>
+        <button className={styles.button} disabled={checkEmptyInputFields()} onClick={()=>addNewProduct()}> Add Product </button>
     </div>
   )
 }

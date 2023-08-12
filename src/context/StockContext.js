@@ -60,6 +60,14 @@ export const StockContextProvider=({children})=>
         setLocalStorage("inventory",updatedInventory);
     } 
 
+    const checkEmptyInputFields=()=>
+    {
+        const {input:{department,name,description,price,stock,sku,supplier,imageUrl}}=state;
+        if(department.length===0 || name.length===0 || description.length===0||price<1 || stock<=0 || sku.length===0 || supplier.length===0 || imageUrl.length<8)
+        return true
+        else
+        return false
+    }
 
     useEffect(()=>{
         const fetchedInventory=getLocalStorage("inventory");
@@ -70,7 +78,7 @@ export const StockContextProvider=({children})=>
     },[]);
 
     return (
-        <StockContext.Provider value={{state,dispatch,addNewProduct}}>
+        <StockContext.Provider value={{state,dispatch,addNewProduct,checkEmptyInputFields}}>
             {children}
         </StockContext.Provider>
     )

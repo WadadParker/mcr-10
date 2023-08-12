@@ -1,9 +1,19 @@
+
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    height: 90vh;
+    row-gap: 1rem;
+    margin-left: 3rem;
+    width: 20rem;
 }
 
+.section {
+    display: grid;
+}
+.section label {
+    justify-self: start;
+    color: rgb(130, 130, 130);
+}
 
 .button {
     color: white;
@@ -11,6 +21,7 @@
     border: 1px solid rgb(22, 100, 244);
     border-radius: 0.5rem;
     padding: 0.3rem 0.8rem;
+    margin-top: 1rem;
 }
 .button:hover {
     filter: brightness(0.8);

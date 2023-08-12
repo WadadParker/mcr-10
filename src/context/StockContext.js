@@ -1,6 +1,7 @@
-import { useContext,createContext,useReducer } from "react";
+import { useContext,createContext,useReducer, useEffect } from "react";
 
 import { inventoryData } from "../backend/Data";
+import { getLocalStorage,setLocalStorage } from "../utils/utilFunctions";
 
 export const StockContext=createContext();
 
@@ -8,7 +9,7 @@ export const StockContextProvider=({children})=>
 {
     const Reducer=(state,{type,payload,inputField})=>
     {
-        const clearInput={name:"",description:""};
+        const clearInput={department:"",name:"",description:"",price:0,stock:0,sku:"",supplier:"",imageUrl:""};
         switch(type) 
         {
             case "DEPARTMENT":
@@ -16,14 +17,16 @@ export const StockContextProvider=({children})=>
 
             case "INPUT_FIELDS":
                 return {...state,input:{...state.input,[inputField]:payload}};  
-               
-            case "ADD":
-                return {...state,list:[...state.list,state.input],input:clearInput,showModal:false};  
              
             case "CLEAR_INPUT":
                 return {...state,input:clearInput,showModal:false};    
 
+            case "GET_INVENTORY":
+                return {...state,inventory:payload}
 
+            case "ADD_PRODUCT_TO_INVENTORY":
+                const newId=state.id + 1
+                return {...state,inventory:payload,id:newId,input:clearInput};    
 
             default:
                 return state;    
@@ -32,12 +35,32 @@ export const StockContextProvider=({children})=>
     const initialState= {
         inventory:inventoryData,
         currentDepartment:"all",
+        input:{department:"",name:"",description:"",price:"",stock:"",sku:"",supplier:"",imageUrl:""},
+        id:55,
     }
     const [state,dispatch]=useReducer(Reducer,initialState);
 
+    const addNewProduct=()=>
+    {
+        const {inventory,input,id}=state;
+        const product={...input,id};
+        const updatedInventory=inventory;
+        updatedInventory.push(product);
+
+        dispatch({type:"ADD_PRODUCT_TO_INVENTORY",payload:updatedInventory});
+        setLocalStorage("inventory",updatedInventory);
+    }
+
+    useEffect(()=>{
+        const fetchedInventory=getLocalStorage("inventory");
+        if(fetchedInventory)
+        {
+            dispatch({type:"GET_INVENTORY",payload:fetchedInventory})
+        }
+    },[]);
 
     return (
-        <StockContext.Provider value={{state,dispatch}}>
+        <StockContext.Provider value={{state,dispatch,addNewProduct}}>
             {children}
         </StockContext.Provider>
     )

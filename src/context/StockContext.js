@@ -1,8 +1,8 @@
 import { useContext,createContext,useReducer } from "react";
 
-export const Context=createContext();
+export const StockContext=createContext();
 
-export const ContextProvider=({children})=>
+export const StockContextProvider=({children})=>
 {
     const Reducer=(state,{type,payload,inputField})=>
     {
@@ -39,9 +39,9 @@ export const ContextProvider=({children})=>
 
 
     return (
-        <Context.Provider value={{state,dispatch}}>
+        <StockContext.Provider value={{state,dispatch}}>
             {children}
-        </Context.Provider>
+        </StockContext.Provider>
     )
 }
-export  const useData= ()=> useContext(Context)
+export  const useData= ()=> useContext(StockContext)

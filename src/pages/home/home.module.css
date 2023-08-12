@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    align-items: start;
+}
+.card {
+    background-color: ghostwhite;
+    border: 1px solid ghostwhite;
+    border-radius: 0.5rem;
+    width: 15rem;
+    margin: 3rem;
+    font-size: 1.5rem;
+    padding-top:1rem ;
+
+}
+.green {
+    color: green;
+    font-weight: 500;
+}
+.yellow {
+    color: yellow;
+    font-weight: 500;
+}
+.red {
+    color: red;
+    font-weight: 500;
+}
